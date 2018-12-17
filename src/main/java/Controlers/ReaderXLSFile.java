@@ -1,5 +1,6 @@
 package Controlers;
 
+import models.Groups;
 import models.Item;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -111,6 +112,7 @@ public class ReaderXLSFile {
         int stolbecCode = centralStolbecCodeFind();
         int stolbecNumber = centralStolbecNumberFind();
         int stolbecName = centralStolbecNameFind();
+        int stolbecGroup = centralStolbecGroupFind();
 
 
         while (!flagToStop) {
@@ -154,6 +156,16 @@ public class ReaderXLSFile {
                     item = new Item(code, String.valueOf(sheet.getRow(iPos + shiftV).getCell(stolbecName).getNumericCellValue()));
                 }
 
+                /*Записываем группу в item*/
+                String groupe;
+                try {
+                    groupe = sheet.getRow(iPos + shiftV).getCell(stolbecGroup).getStringCellValue();
+                } catch (Exception ex) {
+                    groupe = "";
+                }
+                item.setGroupItem(new Groups(groupe));
+
+                /*Записывааем в мапу данные*/
                 itemHashMap.put(item, number);
             }
             iPos++;
@@ -163,6 +175,12 @@ public class ReaderXLSFile {
 
     private static int centralStolbecNameFind() {
         return 2;
+
+    }
+
+    private static int centralStolbecGroupFind() {
+        return 0;
+
     }
 
 

@@ -16,7 +16,6 @@ public class Calculation {
     }
 
     HashMap<Item, Integer> mapTransfer;
-    HashMap<Integer, String> mapCodeName;
     double porogTransfer = 0.7;
 
     public Calculation() {
@@ -52,7 +51,7 @@ public class Calculation {
                 }
             }
 
-            WriteTXTFiles.saveTransferFile(mapTransfer);
+
         }
 
     }

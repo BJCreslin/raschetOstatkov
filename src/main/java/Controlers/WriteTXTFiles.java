@@ -10,7 +10,7 @@ public class WriteTXTFiles {
     public static String NAMEOUTFILE = "out.txt";
     public static String PATHTOFILES = "\\\\Post\\креслин владимир\\перемещение\\";
 
-    public static void saveTransferFile(HashMap<Item, Integer> mapForOut) {
+    public static void saveTransferFile(Map<Item, Integer> mapForOut) {
 
         try (OutputStreamWriter fileOutTXT = new OutputStreamWriter(new FileOutputStream(PATHTOFILES + NAMEOUTFILE, false),
                 "UTF-16")) {

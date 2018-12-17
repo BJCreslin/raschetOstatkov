@@ -3,19 +3,33 @@ package models;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
-import static Controlers.ReaderXLSFile.mapCodeName;
 
 public class TableTransfer extends AbstractTableModel {
-    ArrayList<String[]> tableArrayList;
+    public ArrayList<String[]> getTableArrayList() {
+        return tableArrayList;
+    }
 
-    public TableTransfer(Map<Item, Integer> mapCodeCount) {
+    ArrayList<String[]> tableArrayList;
+    private static final int QANTITYCOLUMNS = 4;
+
+    public static Map<Item, Integer> getMapCodeCount() {
+        return mapCodeCount;
+    }
+
+    private static Map<Item, Integer> mapCodeCount;
+
+    public TableTransfer(Map<Item, Integer> mapCodeCountt) {
+        this.mapCodeCount = mapCodeCountt;
         tableArrayList = new ArrayList<>();
         for (Map.Entry<Item, Integer> entry : mapCodeCount.entrySet()) {
-            String[] rowStringArray = new String[3];
+            String[] rowStringArray = new String[QANTITYCOLUMNS];
             rowStringArray[0] = Integer.toString(entry.getKey().getCode());
             rowStringArray[1] = entry.getKey().getName();
             rowStringArray[2] = Integer.toString(entry.getValue());
+            rowStringArray[3] = entry.getKey().getGroupItem().getName();
             tableArrayList.add(rowStringArray);
         }
     }
@@ -27,7 +41,7 @@ public class TableTransfer extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 3;
+        return QANTITYCOLUMNS;
     }
 
     @Override
@@ -43,7 +57,21 @@ public class TableTransfer extends AbstractTableModel {
                 return "Название";
             case 2:
                 return "Количество";
+            case 3:
+                return "Группа";
         }
         return "";
     }
+
+
+    public Set<String> getGroupsList() {
+        Set<String> vectorFromRow = new TreeSet<>();
+        for (String[] vector : tableArrayList) {
+            vectorFromRow.add(vector[3]);
+        }
+        return vectorFromRow;
+    }
 }
+
+
+
