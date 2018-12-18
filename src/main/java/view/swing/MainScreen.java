@@ -1,25 +1,17 @@
 package view.swing;
 
 import Controlers.WriteTXTFiles;
-import javafx.scene.control.RadioButton;
 import models.Calculation;
 import models.Item;
 import models.TableTransfer;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.text.DefaultEditorKit;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class MainScreen extends JFrame {
     private JTabbedPane tabbedPane1;
@@ -31,6 +23,7 @@ public class MainScreen extends JFrame {
     private JPanel panelTransfer;
     private JScrollPane jpanelTransfer;
     private JPanel panelcheckboxes;
+    private JButton buttonForSaveBAse;
 
 
     private Map<String, JCheckBox> mapGroups;
@@ -117,6 +110,16 @@ public class MainScreen extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 WriteTXTFiles.saveTransferFile(TableTransfer.getMapCodeCount());
+            }
+        });
+
+
+        buttonForSaveBAse.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (calculation.getMapTransfer().size()<1)return;
+
+
             }
         });
 

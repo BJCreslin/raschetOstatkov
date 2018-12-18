@@ -1,9 +1,11 @@
 package models;
 
 public class Item {
-    int code;
-    String name;
-    Groups groupItem;
+    private int code;
+    private String name;
+    private Groups groupItem;
+    private Item itemReplacement;
+    private Item itemOriginal;
 
     public int getCode() {
         return code;
